@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <section id="navbar">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <i class="fa fa-fw fa-clipboard-list"></i>
+              <a class="navbar-brand" href="/">TODO</a>
+               
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>                                   -->
+                </ul>
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="/logout"><button class="btn btn-primary" type="button">Logout</button></a>
+                  </div>
+              </div>
+            </div>
+          </nav>
+    </section>
+
+    <h1>Things To Do:</h1>
+<div  id="taskBox"  class="container">
+    <!-- Things to do -->
+    <div class="container">
+                <h2>You have <%= left %> things left.</h2>
+                <ul>
+                <% todos.forEach( el => { %>
+                    <% if(el.completed === false){ %>
+                        <li class='todoItem' data-id='<%=el._id%>'>
+                            <span class='not'><%= el.todo %></span> 
+                            <span class='<%= el.completed === true ? 'completed' : 'not del fa fa-trash-alt'%>'></span>
+                            <% } %>
+                        </li>
+                <% }) %>    
+                </ul>
+
+
+                <!-- submit new todo form  -->
+                <div class="container-sm">
+            <form action="/todos/createTodo" method='POST'>
+                <div id="submitTodo"class="mb-3">
+                    <input class="form-control" type="text" placeholder="Enter Todo Item" name='todoItem'>
+                </div>          
+                <input class="btn btn-primary" type="submit">
+            </form> 
+        </div> 
+    </div>
+
+    <!-- Things that are completed -->
+    <div id="completedTaskBox" class="container">
+        <% if(done > 0) { %>
+            <h2>You have completed <%= done %> things.</h2>
+        <% } %>
+        <ul>
+            <% todos.forEach( el => { %>
+                <% if(el.completed === true){ %>
+                    <li class='todoItem' data-id='<%=el._id%>'>
+                        <span class='completed'><%= el.todo %></span>
+                        <span class='<%= el.completed === false ? 'completed' : 'not del fa fa-trash-alt'%>'></span>
+                        <% } %>
+                    </li>
+            <% }) %>    
+            </ul>
+    </div>
+</div>
+  
+
+    
+
+    
+
+
+    <script src="js/main.js"></script>
+
+    <!--Bootstrap and Popper Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+</body>
+</html>
