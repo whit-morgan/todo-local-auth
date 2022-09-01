@@ -18,10 +18,13 @@ i{
 #loginContainer{
     max-width: 50% !important;
 }
-#submitTodo{
+.submitTodo{
     max-width: 75%;
 }
 #taskBox{
     margin-top: 2%;
     max-width: 40%;
+}
+#formAndCompleted{
+    margin-top: 5%;
 }

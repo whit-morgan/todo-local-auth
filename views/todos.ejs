@@ -20,11 +20,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <!-- <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                  </li>                                   -->
-                </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
                 <div class="d-grid gap-2 d-md-block">
                     <a href="/logout"><button class="btn btn-primary" type="button">Logout</button></a>
                   </div>
@@ -34,50 +30,101 @@
     </section>
 
     <h1>Things To Do:</h1>
-<div  id="taskBox"  class="container">
+
     <!-- Things to do -->
-    <div class="container">
-                <h2>You have <%= left %> things left.</h2>
-                <ul>
-                <% todos.forEach( el => { %>
-                    <% if(el.completed === false){ %>
-                        <li class='todoItem' data-id='<%=el._id%>'>
-                            <span class='not'><%= el.todo %></span> 
-                            <span class='<%= el.completed === true ? 'completed' : 'not del fa fa-trash-alt'%>'></span>
-                            <% } %>
-                        </li>
-                <% }) %>    
-                </ul>
-
-
-                <!-- submit new todo form  -->
-                <div class="container-sm">
-            <form action="/todos/createTodo" method='POST'>
-                <div id="submitTodo"class="mb-3">
-                    <input class="form-control" type="text" placeholder="Enter Todo Item" name='todoItem'>
-                </div>          
-                <input class="btn btn-primary" type="submit">
-            </form> 
+ 
+                <!-- High Priority Tasks -->
+                <div class="container text-center">
+                    <h2>You have <%= left %> things left.</h2>
+                    <div class="row align-items-start">
+                      <div class="col">
+                        <h3>High Priority Tasks</h3>
+                        <ul>
+                        <% todos.forEach( el => { %>
+                            <% if(el.completed === false){ %>
+                                <li class='todoItem' data-id='<%=el._id%>'>
+                                    <span class='not'><%= el.todo %></span> 
+                                    <span class='fa fa-arrow-up'></span>
+                                    <span class='fa fa-arrow-down'></span>
+                                    <span class='del fa fa-trash-alt'></span>
+                                    <% } %>
+                                </li>
+                        <% }) %>    
+                        </ul>
+                      </div>
+                <!-- Medium Priority Tasks -->
+                      <div class="col">
+                        <h3>Medium Priority Tasks</h3>
+                        <ul>
+                        <% todos.forEach( el => { %>
+                            <% if(el.completed === false){ %>
+                                <li class='todoItem' data-id='<%=el._id%>'>
+                                    <span class='not'><%= el.todo %></span> 
+                                    <span class='fa fa-arrow-up'></span>
+                                    <span class='fa fa-arrow-down'></span>
+                                    <span class='del fa fa-trash-alt'></span>
+                                    <% } %>
+                                </li>
+                        <% }) %>    
+                        </ul>
+                      </div>
+                <!-- Low Priority Tasks -->
+                      <div class="col">
+                        <h3>Low Priority Tasks</h3>
+                        <ul>
+                        <% todos.forEach( el => { %>
+                            <% if(el.completed === false){ %>
+                                <li class='todoItem' data-id='<%=el._id%>'>
+                                    <span class='not'><%= el.todo %></span> 
+                                    <span class='fa fa-arrow-up'></span>
+                                    <span class='fa fa-arrow-down'></span>
+                                    <span class='del fa fa-trash-alt'></span>
+                                    <% } %>
+                                </li>
+                        <% }) %>    
+                        </ul>
+                      </div>
+                    </div>
+                    
+        <!-- submit new todo form  -->
+        <div id="formAndCompleted"class="container text-center border">
+            <div class="row align-items-start">
+                <div class="col">
+                    <h3>Add New Task</h3>
+                    <form action="/todos/createTodo" method='POST'>
+                        <div class="mb-3 submitTodo">
+                            <input class="form-control" type="text" placeholder="Enter Todo Item" name='todoItem'>
+                        </div>          
+                        <select class="form-select mb-3 submitTodo" aria-label="Default select example">
+                            <option selected>Priority</option>
+                            <option value="">High</option>
+                            <option value="">Medium</option>
+                            <option value="">Low</option>
+                        </select>
+                        <input class="btn btn-primary" type="submit">
+                    </form> 
+                </div>
+        <!-- Things that are completed -->
+                <div id="completedTaskBox" class="col">
+                    <% if(done > 0) { %>
+                        <h2>You have completed <%= done %> things.</h2>
+                    <% } %>
+                    <ul>
+                        <% todos.forEach( el => { %>
+                            <% if(el.completed === true){ %>
+                                <li class='todoItem' data-id='<%=el._id%>'>
+                                    <span class='completed'><%= el.todo %></span>
+                                    <span class='<%= el.completed === false ? 'completed' : 'not del fa fa-trash-alt'%>'></span>
+                                    <% } %>
+                                </li>
+                        <% }) %>    
+                        </ul>
+                </div>
+            </div>
         </div> 
     </div>
 
-    <!-- Things that are completed -->
-    <div id="completedTaskBox" class="container">
-        <% if(done > 0) { %>
-            <h2>You have completed <%= done %> things.</h2>
-        <% } %>
-        <ul>
-            <% todos.forEach( el => { %>
-                <% if(el.completed === true){ %>
-                    <li class='todoItem' data-id='<%=el._id%>'>
-                        <span class='completed'><%= el.todo %></span>
-                        <span class='<%= el.completed === false ? 'completed' : 'not del fa fa-trash-alt'%>'></span>
-                        <% } %>
-                    </li>
-            <% }) %>    
-            </ul>
-    </div>
-</div>
+    
   
 
     
